@@ -8,7 +8,7 @@ treeStack *newTreeStack()
 	treeStack *x = malloc(sizeof(treeStack)); 
 	x -> size = 256; // Sets size to the amount of characters for in ASCII.
 	x -> entries = calloc(x->size, sizeof(treeNode *)); // Double check.
-	
+	x -> top = 0;	
 	return x;
 }
 

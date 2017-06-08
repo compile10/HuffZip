@@ -1,1 +1,27 @@
-d
+Assignment 4 README.
+
+USE:
+        - This program is used to compress the average file and then uncompress that same exact file.
+        - There are two programs for this file:
+		- encode:
+			- This encodes a file to a smaller size with keeping the file basically the same.
+			-Arguments:
+				- *This argument has to be present or the program won't run,* -i: Inserts a file into the program to encode it to a smaller file.
+				- *Optional*-o: Puts the output of the encoded program into a file. By default, this will be oFile.
+				- -v: Prints out statistics about the exact file.			
+	
+		- decode:
+			- This decodes that same file.
+			- Arguments:
+				- *This argument has to be present or the program won't run,* -i: Inserts the encoded file given by encode into the program to decode it to the original file.
+				- *Optional*-o: Puts the output of the encoded program into a file. By default, this will be oFile.
+COMPILE:
+        - Use the Makefile:
+                - make all
+                        - Will create an executable program called "encode" and "decode".
+                - make encode
+                        - Creates exectuable as decode.		
+		- make decode
+			- Creates exectuable as decode.
+                - make clean
+                        - Will clean all the object files and program file.
