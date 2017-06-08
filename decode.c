@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 {
 	int sFile = 0;
 	int oFile = 0;
-//	bool verboseMode = false;
+	bool verboseMode = false;
 	
 	uint32_t magicNum = 0xdeadd00d; 
 	uint64_t oSize; 
@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 		{
 			case 'v':
 			{
-//				verboseMode = true;
+				verboseMode = true;
 				break;
 			}
 			case 'i':
@@ -111,7 +111,10 @@ int main(int argc, char **argv)
 		symbol = current; 
 		write(oFile, &symbol, sizeof(uint8_t)); 
 	}
-	
+	if(verboseMode)
+	{
+		printf("Original %lu bits: tree (%d)\n", oSize*8, treeSize);
+	}
 
 	delTree(root); 
 	return 0;
