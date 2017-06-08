@@ -19,8 +19,8 @@ int main(int argc, char **argv)
 {
     int argument,input, leaves = 0, output; 
     // buff is the number of what the read input is. Argument is used for getopt. Leaves is the number treenodes there are.
-    uint64_t bytesRead, bitsRead, buff, indexBit = 0, byteNumber = 0, bitNumber = 0;
-    // indexBit is the last bit that is inputed into the bitVector.
+    uint64_t bytesRead, bitsRead, buff, byteNumber = 0, bitNumber = 0;
+    // bitNumber is the number of bits in the original file.
     uint16_t leaveRep;
     // leaveRep holds the number of bytes of the tree.
     char *file;
@@ -98,17 +98,12 @@ int main(int argc, char **argv)
        close(input); // Closes the file.
    }
     bitVector = newVec(1000); // Creates a new bitVector.
-    printf("%lu\n", histogram[228]);
     for(int in = 0; in <= 255; in++) 
     // Goes through the whole histogram with checking if each index 
     // is greater than zero, then creates a new treeNode for that character.
     {
         if((histogram[in] > 0) && (!(fullQ(que))))
        	{
-	    if(in == 228)
-	    {
-		printf("\nhhh");
-	    }
             newArrayNode = newNode(in, true, histogram[in]);
             enqueue(que, newArrayNode); // Adds that arrayNode to the queue.
 	    ++leaves;
@@ -155,12 +150,11 @@ int main(int argc, char **argv)
     {
 	bytesRead = 0;
 	bitsRead = 0;
-	printf("\n\n");
         for(uint64_t index = 0; index < buff; index++)
         {
 	    int asciiNum = (int) buffer[index];
 	    appendCode(bitVector, &bitsRead, &table[asciiNum]);
-	    ++bit
+	    ++bitNumber;
 	}
 	bitsRead++; 
 	if( bitsRead  % 8 != 0 )
@@ -175,13 +169,12 @@ int main(int argc, char **argv)
 	for(uint64_t y = 0; y < bytesRead; y++) // Writes all the bytes to the from the bitVector to the file.
         {
         	uint8_t x = (bitVector->v[y]);
-        	printf("\n%u", bitVector->v[y]);
         	write(output, &x, sizeof(uint8_t));
         }
     }
     if(verb == true)
     {
-	printf("Original File is %lu, leaves %d (%d) encoding %lu (%lf)", byteNumber, leaves, leaveRep, indexBit, (double)(indexBit/(byteNumber*8)));
+	printf("Original File is %lu, leaves %d (%d) encoding %lu (%lf)", byteNumber, leaves, leaveRep, bitNumber, (double)(((double)bitNumber)/(((double)byteNumber)*8)));
     }
 
     close(input);
