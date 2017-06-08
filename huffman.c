@@ -15,7 +15,8 @@ treeNode *newNode(uint8_t s, bool l, uint64_t c)
     node->symbol = s;
     node->count = c;
     node->leaf = l;
-	
+    node -> left = NULL;
+    node -> right = NULL;	
     return node; 
 }
 
@@ -45,11 +46,11 @@ int32_t stepTree (treeNode *root, treeNode **t, uint32_t code)
 
 void delTree(treeNode *t)
 {
-	if( t -> left != NULL)
+	if( t -> left )
 	{
 		delTree( t -> left);
 	}
-	if ( t -> right != NULL)
+	if ( t -> right )
 	{
 		delTree( t -> right);
 	}

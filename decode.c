@@ -81,7 +81,7 @@ int main(int argc, char **argv)
 	
 	treeNode *root = loadTree(savedTree, treeSize);
 
-	bitV *holdVec = newVec(oSize);
+	bitV *holdVec = newVec(oSize * 8);
 	uint64_t lengthCount = 0; 
 	uint8_t codebuff; 
 	
