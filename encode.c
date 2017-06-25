@@ -108,7 +108,6 @@ int main(int argc, char **argv)
 
 
 
-
     item first, second; // Labels the first two item variables.
     bool firstBool, secondBool; // Then labels the next two boolean variables.
     while((!emptyQ(que))) // Keeps going until the queue until the itself if empty.
@@ -148,8 +147,7 @@ int main(int argc, char **argv)
 
     input = open(file, O_RDONLY);
 
-    while((buff = read(input, buffer, 1000)) != 0) 
-    // Reads through each character and checks what the code is in the table and adds it to the bitVector.
+    while((buff = read(input, buffer, 1000)) != 0)  // Reads through each character and checks what the code is in the table and adds it to the bitVector.
     {
 	bytesRead = 0;
 	bitsRead = 0;

@@ -40,32 +40,36 @@ static inline void setBit(bitV *bv, uint64_t k)
 
 static inline void appendCode(bitV *bv, uint64_t *indexBit, code *c)
 {
-        bool emptyCode = true;
+        bool codeNotEmpty = true;
         code insertCode = *c;
         uint32_t popTemp;
 
-        while(emptyCode)
+        while( codeNotEmpty == true ) 
         {
-                if(*indexBit == bv->l)
+                if(*indexBit == bv->l) //makes bitvector larger if full
                 {
 			bv->l = (bv->l) * 2;
                         bv->v = (uint8_t *)realloc(bv->v, (bv->l));
                 }
-                emptyCode = popCode(&insertCode, &popTemp);
-                if(!(emptyCode))
-                {
-                        break;
-                }
-                if(popTemp == 1)
-                {
-                        setBit(bv, *indexBit);
-                }
-		else if(popTemp == 0)
+
+                codeNotEmpty = popCode(&insertCode, &popTemp); 
+
+		if( codeNotEmpty == true )
 		{
-			clrBit(bv, *indexBit);
+                	if(popTemp == 1)
+                	{
+                        	setBit(bv, *indexBit);
+                	}
+			else
+			{
+				clrBit(bv, *indexBit);
+			}
+
+			++(*indexBit);
 		}
-                ++*indexBit;
+    
         }
+
         return;
 }
 # endif
