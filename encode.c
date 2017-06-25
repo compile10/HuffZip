@@ -29,7 +29,7 @@ int main(int argc, char **argv)
     bitV *bitVector; // Bit Vector that will hold all the codes to be printed to the file.
     item newArrayNode; // Holds the item of the newArrayNode.
     item root; // Holds the root treeNode.
-    queue *que = newQueue(256); // Holds the queue for the whole file.
+    queue *que = newQueue(300); // Holds the queue for the whole file.
     char buffer[1000]; // Char Buffer for the file.
     
 
@@ -94,7 +94,7 @@ int main(int argc, char **argv)
 
     for(int in = 0; in <= 255; in++)  //creates treenode for each char in histogram with count greater than 0
     {
-        if( (histogram[in] > 0) && (!(fullQ(que))) )
+        if(histogram[in] > 0)
        	{
             newArrayNode = newNode(in, true, histogram[in]);
             enqueue(que, newArrayNode); // Adds that arrayNode to the queue.
@@ -159,7 +159,7 @@ int main(int argc, char **argv)
 	    ++bitNumber;
 	}
 	bitsRead++; 
-	kif( bitsRead  % 8 != 0 )
+	if( bitsRead  % 8 != 0 )
         {
                 bytesRead = (bitsRead / 8) + 1;
         }
