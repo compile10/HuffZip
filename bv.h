@@ -48,7 +48,7 @@ static inline void appendCode(bitV *bv, uint64_t *indexBit, code *c)
         {
                 if(*indexBit == bv->l) //makes bitvector larger if full
                 {
-			bv->l = (bv->l) * 2;
+			bv->l = (bv->l) * (bv->l);
                         bv->v = (uint8_t *)realloc(bv->v, (bv->l));
                 }
 

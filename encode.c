@@ -77,13 +77,11 @@ int main(int argc, char **argv)
 
 
     ++histogram[0];
-    ++histogram[255];
-    // Adds one to the 0th and 255th index of the histogram.
+    ++histogram[255]; // Adds one to the 0th and 255th index of the histogram.
+
     if(input != -1) // Checks if a file exists, before reading.
     {
-       while((buff = read(input, buffer, 1000)) != 0) 
-       // Reads the 1000 chars into the file and adding into the buff array that will be read into
-       // the histogram for each byte.
+       while((buff = read(input, buffer, 1000)) != 0)  //adds 1000 bytes at at time into histogram 
        {
           for(uint64_t index = 0; index < buff; index++)
           {
@@ -91,14 +89,12 @@ int main(int argc, char **argv)
               ++byteNumber;
           }
        }
-       close(input); // Closes the file.
+       close(input); 
    }
-    bitVector = newVec(1000); // Creates a new bitVector.
-    for(int in = 0; in <= 255; in++) 
-    // Goes through the whole histogram with checking if each index 
-    // is greater than zero, then creates a new treeNode for that character.
+
+    for(int in = 0; in <= 255; in++)  //creates treenode for each char in histogram with count greater than 0
     {
-        if((histogram[in] > 0) && (!(fullQ(que))))
+        if( (histogram[in] > 0) && (!(fullQ(que))) )
        	{
             newArrayNode = newNode(in, true, histogram[in]);
             enqueue(que, newArrayNode); // Adds that arrayNode to the queue.
@@ -110,7 +106,7 @@ int main(int argc, char **argv)
 
     item first, second; // Labels the first two item variables.
     bool firstBool, secondBool; // Then labels the next two boolean variables.
-    while((!emptyQ(que))) // Keeps going until the queue until the itself if empty.
+    while(emptyQ(que) == false) // Keeps going until the queue until the itself if empty.
     {
         firstBool = dequeue(que, &first); // dequeues first and returns a bool if the queue is empty.
         secondBool = dequeue(que, &second); // dequeues first and returns a bool if the queue is empty.
@@ -131,21 +127,26 @@ int main(int argc, char **argv)
     {
     	output = creat("compressed.bzip", S_IRUSR| S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH); // If not, creates a oFile.txt for the compressed file.
     }
+
+
     uint32_t magicNumber = 0xdeadd00d;
     write(output, &magicNumber, sizeof(magicNumber)); // Writes the magic number to the file.
-    input = open(file, O_RDONLY);
-    fstat(input, &fileSize);
-    byteNumber = (uint64_t) fileSize.st_size;
+   
+    input = open(file, O_RDONLY);	
+    fstat(input, &fileSize);		
+    byteNumber = (uint64_t) fileSize.st_size; 
     close(input);
-    write(output, &byteNumber, sizeof(byteNumber)); // Writes the byteSize of the file.
+    write(output, &byteNumber, sizeof(byteNumber)); // Writes the byteSize of the file
+
     leaveRep = (leaves * 3) - 1;
     write(output, &leaveRep, sizeof(leaveRep)); // Write the treeSize to the file.
-
 	
-
     dumpTree(root, output); // Writes the tree to the file.
 
+
+
     input = open(file, O_RDONLY);
+    bitVector = newVec(1000);
 
     while((buff = read(input, buffer, 1000)) != 0)  // Reads through each character and checks what the code is in the table and adds it to the bitVector.
     {
@@ -158,7 +159,7 @@ int main(int argc, char **argv)
 	    ++bitNumber;
 	}
 	bitsRead++; 
-	if( bitsRead  % 8 != 0 )
+	kif( bitsRead  % 8 != 0 )
         {
                 bytesRead = (bitsRead / 8) + 1;
         }
