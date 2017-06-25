@@ -17,33 +17,26 @@
 
 int main(int argc, char **argv)
 {
-    int argument,input, leaves = 0, output; 
-    // buff is the number of what the read input is. Argument is used for getopt. Leaves is the number treenodes there are.
-    uint64_t bytesRead, bitsRead, buff, byteNumber = 0, bitNumber = 0;
-    // bitNumber is the number of bits in the original file.
-    uint16_t leaveRep;
-    // leaveRep holds the number of bytes of the tree.
-    char *file;
-    // Holds the file name that is given by the -i argument.
-    uint64_t histogram[256];
-    // The array that holds the number of each character exists in the array.
+
+    int argument,input, leaves = 0, output;  // buff is the number of what the read input is. Argument is used for getopt. Leaves is the number treenodes there are.
+    uint64_t bytesRead, bitsRead, buff, byteNumber = 0, bitNumber = 0; // bitNumber is the number of bits in the original file.
+    uint16_t leaveRep; // leaveRep holds the number of bytes of the tree.
+    char *file; // Holds the file name that is given by the -i argument.
+    uint64_t histogram[256]; // The array that holds the number of each character exists in the array.
     bool verb = false; // Holds to see if verbose is true.
     struct stat fileSize;
-    code c, table[256];
-    // Holds the code inside a variable and holds that also in an array.
-    bitV *bitVector;
-    // Bit Vector that will hold all the codes to be printed to the file.
-    item newArrayNode;
-    // Holds the item of the newArrayNode.
-    item root;
-    // Holds the root treeNode.
-    queue *que = newQueue(256);
-    // Holds the queue for the whole file.
-    char buffer[1000];
-    // Char Buffer for the file.
+    code c, table[256]; // Holds the code inside a variable and holds that also in an array.
+    bitV *bitVector; // Bit Vector that will hold all the codes to be printed to the file.
+    item newArrayNode; // Holds the item of the newArrayNode.
+    item root; // Holds the root treeNode.
+    queue *que = newQueue(256); // Holds the queue for the whole file.
+    char buffer[1000]; // Char Buffer for the file.
+    
+
     c = newCode();
-    bool outputFile = false;
-    // Creates a newCode for the variable C.
+    bool outputFile = false; // Creates a newCode for the variable C.
+
+
     for(int d = 0; d <= 255; d++)
     {
 	histogram[d] = 0; // Makes all numbers in the histogram to 0.
@@ -80,6 +73,9 @@ int main(int argc, char **argv)
             }
         }
     }
+
+
+
     ++histogram[0];
     ++histogram[255];
     // Adds one to the 0th and 255th index of the histogram.
@@ -110,6 +106,9 @@ int main(int argc, char **argv)
         }
     }
 
+
+
+
     item first, second; // Labels the first two item variables.
     bool firstBool, secondBool; // Then labels the next two boolean variables.
     while((!emptyQ(que))) // Keeps going until the queue until the itself if empty.
@@ -125,11 +124,13 @@ int main(int argc, char **argv)
     }
     
  
-    buildCode(root, c, table); // Builds the whole code for the tree.
+    buildCode(root, c, table); // Builds code table from the tree 
+
+
     
     if(!(outputFile)) // Checks if the outputFile has already been specified.
     {
-    	output = creat("oFile.txt", S_IRUSR| S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH); // If not, creates a oFile.txt for the compressed file.
+    	output = creat("compressed.bzip", S_IRUSR| S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH); // If not, creates a oFile.txt for the compressed file.
     }
     uint32_t magicNumber = 0xdeadd00d;
     write(output, &magicNumber, sizeof(magicNumber)); // Writes the magic number to the file.
@@ -140,6 +141,8 @@ int main(int argc, char **argv)
     write(output, &byteNumber, sizeof(byteNumber)); // Writes the byteSize of the file.
     leaveRep = (leaves * 3) - 1;
     write(output, &leaveRep, sizeof(leaveRep)); // Write the treeSize to the file.
+
+	
 
     dumpTree(root, output); // Writes the tree to the file.
 
@@ -172,10 +175,13 @@ int main(int argc, char **argv)
         	write(output, &x, sizeof(uint8_t));
         }
     }
-    if(verb == true)
+
+
+    if(verb == true) //prints verbose mode if flag is called
     {
 	printf("Original File is %lu, leaves %d (%d) encoding %lu (%lf)", byteNumber, leaves, leaveRep, bitNumber, (double)(((double)bitNumber)/(((double)byteNumber)*8)));
     }
+
 
     close(input);
     close(output);
