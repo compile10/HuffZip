@@ -3,8 +3,8 @@
 
 This program can compress any file using huffman encoding. 
 
-Type "make" or "make all" on linux to compile the program.
-Type "make clean" to remove .o files and the program
+Type "make" or "make all" on linux to compile the program.  
+Type "make clean" to remove .o files and the program.  
 
 
 ## Commands 
