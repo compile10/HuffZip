@@ -1,8 +1,8 @@
 # HuffZip
 
 
-This program can compress any file using huffman encoding. 
-Written as a project in a UCSC CS class.
+This program can compress any file using huffman encoding.   
+Written as a project in a UCSC CS class.  
 
 Type "make" or "make all" on linux to compile the program.  
 Type "make clean" to remove .o files and the program.  
