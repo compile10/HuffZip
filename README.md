@@ -1,21 +1,30 @@
-# BESTZIP
-WOW 10/10 ZIP OF THE YEAR
+# HuffZip
 
-"This is garbage kill yourselves" - Darrell
 
-"WOW, NICE ONE COMRADE KEEP IT UP PROUD OF YOU" - Karl Mark
+This program can compress any file using huffman tree encoding. 
 
-"A code tour de force" - Donald Trump
+Type "make" or "make all" to compile the program.
+Type "make clean" to remove .o files and the program
 
-"It's like anime but it doesnt make my parrents disapointed in me" -myself
 
-"Weeeeeeeeeeeeeeeeeeeeeeeeeell is this a'int a shiiiiiiiiiiiitshowwwwww.!' - fUCKWAD
+** Commands **
 
-"Wow this one works weeee243eeeeeeeeeeeeee\t
-" - Someone
+-i input file
+-o output file
+-v verbose mode
 
-"Wow, that's pretty good." - Dead Meme
+List of files | Description
+------------- | -----------
+code.h          provided by darrell long, stack library 
+decode.c        The main function for decoding and loadTree function is located here
+decode.h        Declaration for decode.c
+encode.c        The main function for encoding and dumpTree is located here
+encode.h        declaration for encode.c
+huffman.c       For building the treeNode, and other treeNode functions
+huffman.h       The struct for treeNode is located here, and declaration for treenode functions
+Makefile        Compiling sequence instruction
+queue.c         The priority functions are located here
+queue.h         declaration for priority queue functions
+stack.c         The basic stack function
+stack.h         Declaration for stack.c, given by Darrell Long
 
-"I'm gunna make an article abou this" - Local Daily Dot Writer
-
-"Looks like someone doesn't understand sarcasm" -Darrell Long
