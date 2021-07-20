@@ -1,7 +1,7 @@
 # HuffZip
 
 
-This program can compress any file using huffman encoding.   
+This program can compress any file using [huffman encoding](https://en.wikipedia.org/wiki/Huffman_coding).   
 Written as a project in a UCSC CS class.  
 
 Type "make" or "make all" on linux to compile the program.  
